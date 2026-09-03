@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SM Wajhee Babar — AI & Software Engineering</title>
-<meta name="description" content="Portfolio of SM Wajhee Babar — AI & Software Engineering Intern specializing in Machine Learning, RAG Systems, LLMs, and Python.">
+<meta name="description" content="Portfolio of SM Wajhee Babar — AI & Software Engineering Intern specializing in Multi-Agent Systems, RAG, Machine Learning, and Python.">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
     --bg-elevated: #0E1015;
     --surface: #13151C;
     --surface-hover: #181B24;
-    --surface-glass: rgba(19, 21, 28, 0.72);
+    --surface-glass: rgba(19, 21, 28, 0.75);
     --border: rgba(255, 255, 255, 0.08);
     --border-subtle: rgba(255, 255, 255, 0.04);
     --border-glow: rgba(0, 242, 254, 0.25);
@@ -29,6 +29,8 @@
     --accent: #00F2FE;
     --accent-blue: #4FACFE;
     --accent-mint: #38EF7D;
+    --accent-red: #FF3B30;
+    --accent-red-glow: rgba(255, 59, 48, 0.2);
     --accent-glow: rgba(0, 242, 254, 0.16);
     --accent-gradient: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
     
@@ -613,7 +615,7 @@
   .projects {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 28px;
   }
   .proj-card {
     position: relative;
@@ -624,6 +626,10 @@
     padding: 28px;
     transition: transform 0.4s var(--ease-spring), border-color 0.3s ease, box-shadow 0.3s ease;
     transform-style: preserve-3d;
+  }
+  .proj-card.featured-card {
+    border-color: rgba(0, 242, 254, 0.25);
+    background: linear-gradient(180deg, rgba(19, 21, 28, 0.95) 0%, rgba(14, 16, 21, 0.95) 100%);
   }
   .proj-card::before {
     content: '';
@@ -653,12 +659,23 @@
     margin-bottom: 12px;
   }
   .proj-title {
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 700;
     color: var(--text);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+  }
+  .proj-featured-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    background: rgba(0, 242, 254, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(0, 242, 254, 0.3);
   }
   .proj-arrow {
     width: 32px;
@@ -681,14 +698,14 @@
   }
   .proj-desc {
     color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.65;
-    margin-bottom: 20px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 22px;
   }
 
   /* Motion Graphic Diagrams */
   .proj-diagram {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     padding: 18px;
     background: rgba(10, 12, 16, 0.85);
     border: 1px solid var(--border);
@@ -722,6 +739,14 @@
     stroke: var(--accent);
     fill: rgba(0, 242, 254, 0.08);
   }
+  .dg-node-box.dg-red {
+    stroke: var(--accent-red);
+    fill: rgba(255, 59, 48, 0.1);
+  }
+  .dg-node-box.dg-green {
+    stroke: var(--accent-mint);
+    fill: rgba(56, 239, 125, 0.08);
+  }
   .dg-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10.5px;
@@ -738,6 +763,9 @@
     stroke-width: 1.2;
     fill: none;
   }
+  .dg-arrow.red-arrow {
+    stroke: rgba(255, 59, 48, 0.5);
+  }
   .dg-lane-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
@@ -753,8 +781,145 @@
     opacity: 0.75;
     animation: dgFlow 1.2s linear infinite;
   }
+  .dg-flow.red-flow {
+    stroke: var(--accent-red);
+    animation: dgFlow 0.8s linear infinite;
+  }
   @keyframes dgFlow {
     to { stroke-dashoffset: -20; }
+  }
+
+  /* Screenshot Showcase & Gallery Component */
+  .screenshot-showcase {
+    margin-bottom: 22px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .showcase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .showcase-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .showcase-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .showcase-tab:hover {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .showcase-tab.active {
+    color: #FFF;
+    background: rgba(0, 242, 254, 0.12);
+    border-color: rgba(0, 242, 254, 0.3);
+  }
+  .showcase-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .showcase-viewport {
+    position: relative;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #090B10;
+    min-height: 240px;
+    cursor: zoom-in;
+  }
+  .showcase-img {
+    max-width: 100%;
+    max-height: 380px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: opacity 0.3s ease, transform 0.3s var(--ease-spring);
+  }
+  .showcase-img:hover {
+    transform: scale(1.015);
+  }
+  .showcase-caption {
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: rgba(14, 16, 21, 0.9);
+    border-top: 1px solid var(--border-subtle);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Lightbox Modal */
+  .lightbox-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    cursor: zoom-out;
+  }
+  .lightbox-modal.active {
+    display: flex;
+    animation: fadeIn 0.25s ease forwards;
+  }
+  .lightbox-img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    background: rgba(255,255,255,0.1);
+    color: #FFF;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover {
+    background: rgba(255,255,255,0.25);
   }
 
   .proj-tags {
@@ -919,6 +1084,7 @@
     .wrap { padding: 0 18px; }
     .contact-box { padding: 32px 20px; }
     .exp-header { flex-direction: column; gap: 8px; }
+    .showcase-header { flex-direction: column; align-items: flex-start; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1010,7 +1176,7 @@
 
     <!-- Bio / Lede -->
     <p class="lede fade-in-up" style="animation-delay: 0.3s;">
-      Artificial Intelligence Intern with hands-on experience in <strong>Machine Learning</strong>, <strong>Python</strong>, <strong>RAG systems</strong>, conversational AI, and LLM-powered applications. Passionate about engineering high-impact AI architectures using embeddings, vector similarity search, and interactive interfaces.
+      Artificial Intelligence Intern with hands-on experience in <strong>Multi-Agent Systems</strong>, <strong>RAG Architectures</strong>, <strong>Machine Learning</strong>, and <strong>Python</strong>. Passionate about engineering production-grade AI solutions using FastAPI, React, vector search, embeddings, and intelligent agent orchestration.
     </p>
 
     <!-- CTAs -->
@@ -1036,8 +1202,11 @@
     
     <div class="skills-grid">
       <div class="skill-pill"><span class="dot"></span> Python</div>
+      <div class="skill-pill"><span class="dot"></span> Multi-Agent Orchestration</div>
       <div class="skill-pill"><span class="dot"></span> RAG Systems &amp; Retrieval</div>
-      <div class="skill-pill"><span class="dot"></span> Large Language Models (LLMs)</div>
+      <div class="skill-pill"><span class="dot"></span> FastAPI Backend</div>
+      <div class="skill-pill"><span class="dot"></span> React Frontend</div>
+      <div class="skill-pill"><span class="dot"></span> Large Language Models (LLMs &amp; Groq)</div>
       <div class="skill-pill"><span class="dot"></span> Vector Databases (ChromaDB)</div>
       <div class="skill-pill"><span class="dot"></span> Sentence Transformers &amp; Embeddings</div>
       <div class="skill-pill"><span class="dot"></span> Deep Learning &amp; NLP</div>
@@ -1045,7 +1214,6 @@
       <div class="skill-pill"><span class="dot"></span> RESTful APIs &amp; Integrations</div>
       <div class="skill-pill"><span class="dot"></span> Streamlit &amp; Rapid AI Prototyping</div>
       <div class="skill-pill"><span class="dot"></span> NumPy &amp; Computational Basics</div>
-      <div class="skill-pill"><span class="dot"></span> Chatbot &amp; Agent Development</div>
       <div class="skill-pill"><span class="dot"></span> Git / GitHub Version Control</div>
     </div>
   </section>
@@ -1068,10 +1236,10 @@
         <div class="exp-badge">Present · Internship</div>
       </div>
       <ul class="exp-list">
-        <li>Engineered end-to-end AI applications using Python, modern LLM APIs (Groq), and conversational AI frameworks.</li>
+        <li>Engineered end-to-end AI applications using Python, modern LLM APIs (Groq), and multi-agent AI frameworks.</li>
         <li>Architected a custom Retrieval-Augmented Generation (RAG) pipeline for document question-answering, handling chunking, embedding generation, and vector indexing.</li>
         <li>Implemented high-performance semantic search using Sentence Transformers and ChromaDB.</li>
-        <li>Built an interactive, production-ready Streamlit AI assistant interface for rapid user interaction and evaluation.</li>
+        <li>Built interactive, production-ready Streamlit and React AI assistant interfaces for rapid user interaction and evaluation.</li>
         <li>Managed CI/CD, Git/GitHub version control workflows, environment configurations, and deployment strategies.</li>
       </ul>
     </div>
@@ -1081,20 +1249,201 @@
   <section id="projects" class="reveal">
     <div class="section-label">03 // Featured Work</div>
     <h2 class="section-title">Projects &amp; Systems</h2>
-    <p class="section-sub">Selected engineering builds and intelligent software solutions.</p>
+    <p class="section-sub">Selected engineering builds, multi-agent pipelines, and intelligent software architectures.</p>
     
     <div class="projects">
 
-      <!-- PROJECT 1: RAG ASSISTANT -->
-      <div class="proj-card">
+      <!-- PROJECT 1: AI EMERGENCY CHATBOT (FEATURED MULTI-AGENT ARCHITECTURE) -->
+      <div class="proj-card featured-card">
         <div class="proj-top">
           <div class="proj-title">
-            <span>RAG-Based Knowledge Assistant</span>
+            <span>Emergency AI — Agentic Emergency Guidance System</span>
+            <span class="proj-featured-badge">Multi-Agent</span>
           </div>
           <div class="proj-arrow">↗</div>
         </div>
+        
         <div class="proj-desc">
-          A production-grade Retrieval-Augmented Generation architecture that grounds LLM reasoning in verified custom knowledge bases—embedding PDF/text docs, conducting high-speed vector similarity queries, and generating contextually accurate responses.
+          An autonomous multi-agent emergency triage and guidance system. When a critical crisis or hazard (e.g. floods, building fires) is detected by the LLM-powered crisis detector with high confidence (97%+), the system triggers an instant <strong>Emergency Bypass</strong> routing directly to Escalation and Logging agents. For standard assistance, a central Supervisor coordinates a 7-agent pipeline (Intake, Triage, Guidance, Escalation, Resources, Logging, and Response Delivery) exposed via FastAPI and rendered through an interactive React dashboard.
+        </div>
+
+        <!-- Live Screenshot Showcase / Tabbed Gallery -->
+        <div class="screenshot-showcase">
+          <div class="showcase-header">
+            <div class="showcase-tabs">
+              <button class="showcase-tab active" onclick="switchShowcase('emergency', 'guidance', this)">01 // Situation Analysis</button>
+              <button class="showcase-tab" onclick="switchShowcase('emergency', 'trace', this)">02 // Agent Trace</button>
+              <button class="showcase-tab" onclick="switchShowcase('emergency', 'input', this)">03 // Prompt Input</button>
+              <button class="showcase-tab" onclick="switchShowcase('emergency', 'analyzing', this)">04 // Active Inference</button>
+            </div>
+            <div class="showcase-badge">
+              <span class="rec-dot" style="width:5px; height:5px;"></span>
+              <span>VITE · REACT @ 5173</span>
+            </div>
+          </div>
+          <div class="showcase-viewport" onclick="openLightboxFrom('showcaseImage-emergency')">
+            <img id="showcaseImage-emergency" src="assets/emergency-ai/emergency-guidance.png" alt="Emergency AI Dashboard" class="showcase-img">
+          </div>
+          <div class="showcase-caption">
+            <span id="showcaseLabel-emergency">Situation Analysis &amp; Step-by-Step Emergency Guidance</span>
+            <span style="color:var(--accent); font-size:11px;">🔍 Click to expand</span>
+          </div>
+        </div>
+
+        <!-- Animated Multi-Agent Architecture Diagram -->
+        <div class="proj-diagram">
+          <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-cyan-em" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0 L6,3.5 L0,7 Z" fill="#00F2FE"/>
+              </marker>
+              <marker id="arr-red-em" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0 L6,3.5 L0,7 Z" fill="#FF3B30"/>
+              </marker>
+              <marker id="arr-gray-em" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0 L6,3.5 L0,7 Z" fill="rgba(255,255,255,0.25)"/>
+              </marker>
+            </defs>
+
+            <!-- LANE LABELS -->
+            <text x="16" y="20" class="dg-lane-label">// 1. REQUEST INTAKE &amp; CRISIS DETECTION</text>
+            
+            <!-- INTAKE ROW -->
+            <rect x="14" y="30" width="100" height="42" class="dg-node-box"/>
+            <text x="64" y="47" text-anchor="middle" class="dg-label">User Prompt</text>
+            <text x="64" y="60" text-anchor="middle" class="dg-sublabel">React Frontend</text>
+
+            <path d="M114 51 H154" class="dg-arrow" marker-end="url(#arr-gray-em)"/>
+            <path d="M114 51 H154" class="dg-flow"/>
+
+            <rect x="154" y="30" width="115" height="42" class="dg-node-box"/>
+            <text x="211" y="47" text-anchor="middle" class="dg-label">handle_request</text>
+            <text x="211" y="60" text-anchor="middle" class="dg-sublabel">FastAPI Router</text>
+
+            <path d="M269 51 H310" class="dg-arrow" marker-end="url(#arr-gray-em)"/>
+            <path d="M269 51 H310" class="dg-flow"/>
+
+            <!-- CRISIS DETECTOR DECISION NODE -->
+            <rect x="310" y="28" width="135" height="46" class="dg-node-box dg-accent"/>
+            <text x="377" y="47" text-anchor="middle" class="dg-label" fill="#00F2FE">crisis_detector</text>
+            <text x="377" y="61" text-anchor="middle" class="dg-sublabel">LLM Flag / 97% Conf</text>
+
+            <!-- BRANCH A: RED FLAG EMERGENCY BYPASS PATH -->
+            <path d="M445 42 H495" class="dg-arrow red-arrow" marker-end="url(#arr-red-em)"/>
+            <path d="M445 42 H495" class="dg-flow red-flow"/>
+            <text x="470" y="34" text-anchor="middle" class="mono" font-size="8" fill="#FF3B30">RED FLAG</text>
+
+            <rect x="495" y="22" width="105" height="40" class="dg-node-box dg-red"/>
+            <text x="547" y="38" text-anchor="middle" class="dg-label" fill="#FF8E8A">escalation_agent</text>
+            <text x="547" y="51" text-anchor="middle" class="dg-sublabel">Crisis Escalation</text>
+
+            <path d="M600 42 H630" class="dg-arrow red-arrow" marker-end="url(#arr-red-em)"/>
+            <path d="M600 42 H630" class="dg-flow red-flow"/>
+
+            <rect x="630" y="22" width="76" height="40" class="dg-node-box dg-green"/>
+            <text x="668" y="38" text-anchor="middle" class="dg-label" fill="#38EF7D">logging</text>
+            <text x="668" y="51" text-anchor="middle" class="dg-sublabel">Audit Trace</text>
+
+            <!-- BRANCH B: NORMAL SUPERVISOR MULTI-AGENT PATH -->
+            <text x="16" y="112" class="dg-lane-label">// 2. SUPERVISOR &amp; SPECIALIZED MULTI-AGENTS</text>
+            
+            <path d="M377 74 V120" class="dg-arrow" marker-end="url(#arr-cyan-em)"/>
+            <path d="M377 74 V120" class="dg-flow"/>
+            <text x="382" y="98" font-size="8" class="mono" fill="#00F2FE">NO RED FLAGS</text>
+
+            <rect x="310" y="120" width="135" height="44" class="dg-node-box dg-accent"/>
+            <text x="377" y="139" text-anchor="middle" class="dg-label" fill="#00F2FE">Supervisor Agent</text>
+            <text x="377" y="153" text-anchor="middle" class="dg-sublabel">Pipeline Orchestrator</text>
+
+            <!-- Sub-Agents Grid -->
+            <path d="M310 142 H220 V195" class="dg-arrow"/>
+            <path d="M377 164 V195" class="dg-arrow"/>
+            <path d="M445 142 H530 V195" class="dg-arrow"/>
+
+            <rect x="14" y="195" width="85" height="34" class="dg-node-box"/>
+            <text x="56" y="212" text-anchor="middle" class="dg-label" font-size="9.5">Intake</text>
+            <text x="56" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Context parsing</text>
+
+            <rect x="106" y="195" width="85" height="34" class="dg-node-box"/>
+            <text x="148" y="212" text-anchor="middle" class="dg-label" font-size="9.5">Triage</text>
+            <text x="148" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Severity rating</text>
+
+            <rect x="198" y="195" width="95" height="34" class="dg-node-box dg-accent"/>
+            <text x="245" y="212" text-anchor="middle" class="dg-label" font-size="9.5" fill="#00F2FE">Guidance</text>
+            <text x="245" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Step-by-step</text>
+
+            <rect x="300" y="195" width="95" height="34" class="dg-node-box"/>
+            <text x="347" y="212" text-anchor="middle" class="dg-label" font-size="9.5">Escalation</text>
+            <text x="347" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Emergency call</text>
+
+            <rect x="402" y="195" width="90" height="34" class="dg-node-box"/>
+            <text x="447" y="212" text-anchor="middle" class="dg-label" font-size="9.5">Resources</text>
+            <text x="447" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Shelters/Helplines</text>
+
+            <rect x="499" y="195" width="80" height="34" class="dg-node-box dg-green"/>
+            <text x="539" y="212" text-anchor="middle" class="dg-label" font-size="9.5" fill="#38EF7D">Logging</text>
+            <text x="539" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Audit trace</text>
+
+            <rect x="586" y="195" width="120" height="34" class="dg-node-box dg-accent"/>
+            <text x="646" y="212" text-anchor="middle" class="dg-label" font-size="9.5" fill="#00F2FE">Response Delivery</text>
+            <text x="646" y="222" text-anchor="middle" class="dg-sublabel" font-size="8">Final synthesis</text>
+
+            <!-- FastApi payload return to React -->
+            <path d="M646 229 V260 H360" class="dg-arrow" marker-end="url(#arr-cyan-em)"/>
+            <path d="M668 62 V260 H360" class="dg-arrow red-arrow"/>
+            <rect x="180" y="246" width="360" height="28" class="dg-node-box dg-accent"/>
+            <text x="360" y="264" text-anchor="middle" class="mono" font-size="10" fill="#F4F6FB">
+              FastAPI Payload ➔ React: { crisis_status, situation_type, triage_level, guidance }
+            </text>
+          </svg>
+        </div>
+
+        <div class="proj-tags">
+          <span>FastAPI</span>
+          <span>React (Vite)</span>
+          <span>Multi-Agent System</span>
+          <span>Supervisor Architecture</span>
+          <span>Crisis Detection LLM</span>
+          <span>Emergency Bypass Logic</span>
+          <span>Agent Execution Trace</span>
+        </div>
+      </div>
+
+      <!-- PROJECT 2: KORG RAG INTEGRATED KNOWLEDGE ASSISTANT -->
+      <div class="proj-card featured-card">
+        <div class="proj-top">
+          <div class="proj-title">
+            <span>Korg — RAG Integrated Knowledge Assistant</span>
+            <span class="proj-featured-badge">RAG + Groq</span>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </div>
+        
+        <div class="proj-desc">
+          An intelligent document companion and Retrieval-Augmented Generation (RAG) assistant designed to ingest custom document knowledge bases, execute top-k semantic vector similarity search using ChromaDB and Sentence Transformers, and synthesize natural, context-grounded responses via Groq LLMs. Features voice response synthesis (TTS "Read responses aloud"), dynamic chat sessions, interactive prompt suggestions, and high-speed retrieval.
+        </div>
+
+        <!-- Korg Live Screenshot Showcase / Tabbed Gallery -->
+        <div class="screenshot-showcase">
+          <div class="showcase-header">
+            <div class="showcase-tabs">
+              <button class="showcase-tab active" onclick="switchShowcase('korg', 'ui', this)">01 // Assistant UI</button>
+              <button class="showcase-tab" onclick="switchShowcase('korg', 'chat', this)">02 // Contextual Response</button>
+              <button class="showcase-tab" onclick="switchShowcase('korg', 'prompts', this)">03 // Knowledge Prompts</button>
+              <button class="showcase-tab" onclick="switchShowcase('korg', 'logo', this)">04 // Korg Companion</button>
+            </div>
+            <div class="showcase-badge">
+              <span class="rec-dot" style="width:5px; height:5px;"></span>
+              <span>POWERED BY RAG + GROQ</span>
+            </div>
+          </div>
+          <div class="showcase-viewport" onclick="openLightboxFrom('showcaseImage-korg')">
+            <img id="showcaseImage-korg" src="assets/korg-rag/korg-full-ui.png" alt="Korg RAG Assistant" class="showcase-img">
+          </div>
+          <div class="showcase-caption">
+            <span id="showcaseLabel-korg">Korg Intelligent Document Companion Interface</span>
+            <span style="color:var(--accent); font-size:11px;">🔍 Click to expand</span>
+          </div>
         </div>
 
         <!-- Animated SVG Flow -->
@@ -1138,11 +1487,11 @@
             <text x="595" y="66" text-anchor="middle" class="dg-sublabel">Vector Store</text>
 
             <!-- Lane 2: Query / Generation -->
-            <text x="16" y="118" class="dg-lane-label">// REAL-TIME QUERY &amp; INFERENCE</text>
+            <text x="16" y="118" class="dg-lane-label">// REAL-TIME QUERY &amp; KORG INFERENCE</text>
             
             <rect x="14" y="128" width="105" height="48" class="dg-node-box"/>
             <text x="66" y="148" text-anchor="middle" class="dg-label">User Query</text>
-            <text x="66" y="162" text-anchor="middle" class="dg-sublabel">Streamlit UI</text>
+            <text x="66" y="162" text-anchor="middle" class="dg-sublabel">Korg UI / Voice</text>
 
             <path d="M119 152 H340" class="dg-arrow" marker-end="url(#arr-gray)"/>
             <path d="M119 152 H340" class="dg-flow"/>
@@ -1155,7 +1504,7 @@
             <path d="M475 152 H528" class="dg-flow"/>
 
             <rect x="528" y="128" width="135" height="48" class="dg-node-box dg-accent"/>
-            <text x="595" y="148" text-anchor="middle" class="dg-label" fill="#00F2FE">Groq / LLM</text>
+            <text x="595" y="148" text-anchor="middle" class="dg-label" fill="#00F2FE">Groq / Korg LLM</text>
             <text x="595" y="162" text-anchor="middle" class="dg-sublabel">Contextual Output</text>
             
             <!-- Link from DB to Similarity -->
@@ -1169,27 +1518,8 @@
           <span>Sentence Transformers</span>
           <span>ChromaDB</span>
           <span>Groq API</span>
-          <span>Streamlit</span>
-        </div>
-      </div>
-
-      <!-- PROJECT 2: AI CONVERSATIONAL CHATBOT -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-title">
-            <span>Conversational AI Chatbot</span>
-          </div>
-          <div class="proj-arrow">↗</div>
-        </div>
-        <div class="proj-desc">
-          An intelligent conversational AI system built using deep learning and Natural Language Processing algorithms to classify intent, maintain stateful dialogue memory, and deliver human-like conversational responses.
-        </div>
-        <div class="proj-tags">
-          <span>Python</span>
-          <span>Deep Learning</span>
-          <span>NLP</span>
-          <span>Intent Classification</span>
-          <span>Dialogue State</span>
+          <span>Text-to-Speech (TTS)</span>
+          <span>Knowledge Base Ingestion</span>
         </div>
       </div>
 
@@ -1323,6 +1653,12 @@
 
 </main>
 
+<!-- Lightbox Modal for Screenshots -->
+<div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightboxImage" src="" alt="Enlarged screenshot" class="lightbox-img">
+</div>
+
 <!-- Toast -->
 <div id="toast" class="toast">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00F2FE" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1348,7 +1684,6 @@
   var photoInput = document.getElementById('photoUploadInput');
   var profileImage = document.getElementById('profileImage');
 
-  // Check if user previously saved a custom avatar in localStorage
   var savedAvatar = localStorage.getItem('custom_wajhee_avatar');
   if (savedAvatar) {
     profileImage.src = savedAvatar;
@@ -1375,6 +1710,88 @@
         reader.readAsDataURL(file);
       }
     });
+  }
+
+  // Multi-Project Screenshot Showcase Data
+  var showcases = {
+    emergency: {
+      guidance: {
+        src: 'assets/emergency-ai/emergency-guidance.png',
+        label: 'Situation Analysis & Step-by-Step Emergency Guidance'
+      },
+      trace: {
+        src: 'assets/emergency-ai/emergency-trace.png',
+        label: 'Agent Execution Trace: Crisis Detector (97% Conf), Escalation & Logging Agents'
+      },
+      input: {
+        src: 'assets/emergency-ai/emergency-input.png',
+        label: 'Emergency AI Input Dashboard: User Scenario Intake'
+      },
+      analyzing: {
+        src: 'assets/emergency-ai/emergency-analyzing.png',
+        label: 'Active Multi-Agent Orchestration & Real-time Inference State'
+      }
+    },
+    korg: {
+      ui: {
+        src: 'assets/korg-rag/korg-full-ui.png',
+        label: 'Korg Intelligent Document Companion Interface & Settings Sidebar'
+      },
+      chat: {
+        src: 'assets/korg-rag/korg-chat-response.png',
+        label: 'Korg Contextual Grounded Response with Conversational Personality & Audio Synthesis'
+      },
+      prompts: {
+        src: 'assets/korg-rag/korg-prompts.png',
+        label: 'Suggested Knowledge Base Search & Prompt Query Cards'
+      },
+      logo: {
+        src: 'assets/korg-rag/korg-logo.png',
+        label: 'Korg Brand & Intelligent Document Companion Banner'
+      }
+    }
+  };
+
+  function switchShowcase(projKey, tabKey, tabEl) {
+    var proj = showcases[projKey];
+    if (!proj) return;
+    var data = proj[tabKey];
+    if (!data) return;
+    var img = document.getElementById('showcaseImage-' + projKey);
+    var label = document.getElementById('showcaseLabel-' + projKey);
+    if (img && label) {
+      img.style.opacity = '0';
+      setTimeout(function() {
+        img.src = data.src;
+        label.textContent = data.label;
+        img.style.opacity = '1';
+      }, 150);
+    }
+    var parentTabs = tabEl.parentElement;
+    if (parentTabs) {
+      parentTabs.querySelectorAll('.showcase-tab').forEach(function(t) {
+        t.classList.remove('active');
+      });
+    }
+    if (tabEl) tabEl.classList.add('active');
+  }
+
+  // Lightbox Modal for Screenshots
+  function openLightboxFrom(imgId) {
+    var img = document.getElementById(imgId);
+    var modal = document.getElementById('lightboxModal');
+    var modalImg = document.getElementById('lightboxImage');
+    if (img && modal && modalImg) {
+      modalImg.src = img.src;
+      modal.classList.add('active');
+    }
+  }
+
+  function closeLightbox(e) {
+    if (e.target.id === 'lightboxModal' || e.target.classList.contains('lightbox-close')) {
+      var modal = document.getElementById('lightboxModal');
+      if (modal) modal.classList.remove('active');
+    }
   }
 
   // Smooth Scroll & Active Nav Tracking
@@ -1409,7 +1826,7 @@
           }
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.reveal, section').forEach(function(el) {
       observer.observe(el);
@@ -1440,8 +1857,8 @@
       
       var centerX = rect.width / 2;
       var centerY = rect.height / 2;
-      var rotateX = ((y - centerY) / centerY) * -4;
-      var rotateY = ((x - centerX) / centerX) * 4;
+      var rotateX = ((y - centerY) / centerY) * -3;
+      var rotateY = ((x - centerX) / centerX) * 3;
       card.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) translateY(-3px)';
     });
 
@@ -1492,7 +1909,6 @@
       mouse.y = e.clientY;
     });
 
-    // Particle constructor
     var numParticles = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 18000), 55);
     for (var i = 0; i < numParticles; i++) {
       particles.push({
@@ -1518,7 +1934,6 @@
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Mouse connection & displacement
         var dx = mouse.x - p.x;
         var dy = mouse.y - p.y;
         var dist = Math.sqrt(dx * dx + dy * dy);
@@ -1533,7 +1948,6 @@
         ctx.fillStyle = 'rgba(0, 242, 254, ' + alpha + ')';
         ctx.fill();
 
-        // Connect nearby particles
         for (var j = i + 1; j < particles.length; j++) {
           var p2 = particles[j];
           var djx = p.x - p2.x;
