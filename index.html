@@ -11,6 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
+<!-- Image Data Bundle for Guaranteed Offline/Live Rendering -->
+<script src="assets/images.js"></script>
+
 <style>
   :root {
     --bg: #07080B;
@@ -1148,7 +1151,7 @@
       <div class="avatar-frame" id="avatarButton" title="Click to change photo">
         <div class="avatar-orbit"></div>
         <div class="avatar-img-wrap">
-          <img src="avatar.png" id="profileImage" alt="SM Wajhee Babar" class="avatar-img" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80';">
+          <img src="avatar.png" id="profileImage" alt="SM Wajhee Babar" class="avatar-img" onerror="imgFallback(this, 'avatar')">
           <div class="avatar-overlay">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
@@ -1282,7 +1285,7 @@
             </div>
           </div>
           <div class="showcase-viewport" onclick="openLightboxFrom('showcaseImage-emergency')">
-            <img id="showcaseImage-emergency" src="assets/emergency-ai/emergency-guidance.png" alt="Emergency AI Dashboard" class="showcase-img">
+            <img id="showcaseImage-emergency" src="assets/emergency-ai/emergency-guidance.png" alt="Emergency AI Dashboard" class="showcase-img" onerror="imgFallback(this, 'emergency_guidance')">
           </div>
           <div class="showcase-caption">
             <span id="showcaseLabel-emergency">Situation Analysis &amp; Step-by-Step Emergency Guidance</span>
@@ -1438,7 +1441,7 @@
             </div>
           </div>
           <div class="showcase-viewport" onclick="openLightboxFrom('showcaseImage-korg')">
-            <img id="showcaseImage-korg" src="assets/korg-rag/korg-full-ui.png" alt="Korg RAG Assistant" class="showcase-img">
+            <img id="showcaseImage-korg" src="assets/korg-rag/korg-full-ui.png" alt="Korg RAG Assistant" class="showcase-img" onerror="imgFallback(this, 'korg_ui')">
           </div>
           <div class="showcase-caption">
             <span id="showcaseLabel-korg">Korg Intelligent Document Companion Interface</span>
@@ -1666,6 +1669,30 @@
 </div>
 
 <script>
+  // Safe Image Fallback Resolver (Zero Broken Images / Question Marks)
+  function imgFallback(img, key) {
+    if (!img) return;
+    if (window.PORTFOLIO_IMAGES && window.PORTFOLIO_IMAGES[key]) {
+      img.src = window.PORTFOLIO_IMAGES[key];
+    }
+  }
+
+  // Auto verify and fix all images on page load
+  window.addEventListener('DOMContentLoaded', function() {
+    var pImg = document.getElementById('profileImage');
+    if (pImg && (!pImg.complete || pImg.naturalWidth === 0)) {
+      imgFallback(pImg, 'avatar');
+    }
+    var emImg = document.getElementById('showcaseImage-emergency');
+    if (emImg && (!emImg.complete || emImg.naturalWidth === 0)) {
+      imgFallback(emImg, 'emergency_guidance');
+    }
+    var korgImg = document.getElementById('showcaseImage-korg');
+    if (korgImg && (!korgImg.complete || korgImg.naturalWidth === 0)) {
+      imgFallback(korgImg, 'korg_ui');
+    }
+  });
+
   // Dynamic Frame Timecode in HUD
   function updateTimecode() {
     var now = new Date();
@@ -1685,7 +1712,7 @@
   var profileImage = document.getElementById('profileImage');
 
   var savedAvatar = localStorage.getItem('custom_wajhee_avatar');
-  if (savedAvatar) {
+  if (savedAvatar && savedAvatar.startsWith('data:image')) {
     profileImage.src = savedAvatar;
   }
 
@@ -1712,41 +1739,49 @@
     });
   }
 
-  // Multi-Project Screenshot Showcase Data
+  // Multi-Project Screenshot Showcase Data with Fallback Keys
   var showcases = {
     emergency: {
       guidance: {
         src: 'assets/emergency-ai/emergency-guidance.png',
+        fallbackKey: 'emergency_guidance',
         label: 'Situation Analysis & Step-by-Step Emergency Guidance'
       },
       trace: {
         src: 'assets/emergency-ai/emergency-trace.png',
+        fallbackKey: 'emergency_trace',
         label: 'Agent Execution Trace: Crisis Detector (97% Conf), Escalation & Logging Agents'
       },
       input: {
         src: 'assets/emergency-ai/emergency-input.png',
+        fallbackKey: 'emergency_input',
         label: 'Emergency AI Input Dashboard: User Scenario Intake'
       },
       analyzing: {
         src: 'assets/emergency-ai/emergency-analyzing.png',
+        fallbackKey: 'emergency_analyzing',
         label: 'Active Multi-Agent Orchestration & Real-time Inference State'
       }
     },
     korg: {
       ui: {
         src: 'assets/korg-rag/korg-full-ui.png',
+        fallbackKey: 'korg_ui',
         label: 'Korg Intelligent Document Companion Interface & Settings Sidebar'
       },
       chat: {
         src: 'assets/korg-rag/korg-chat-response.png',
+        fallbackKey: 'korg_chat',
         label: 'Korg Contextual Grounded Response with Conversational Personality & Audio Synthesis'
       },
       prompts: {
         src: 'assets/korg-rag/korg-prompts.png',
+        fallbackKey: 'korg_prompts',
         label: 'Suggested Knowledge Base Search & Prompt Query Cards'
       },
       logo: {
         src: 'assets/korg-rag/korg-logo.png',
+        fallbackKey: 'korg_logo',
         label: 'Korg Brand & Intelligent Document Companion Banner'
       }
     }
@@ -1763,6 +1798,9 @@
       img.style.opacity = '0';
       setTimeout(function() {
         img.src = data.src;
+        img.onerror = function() {
+          imgFallback(img, data.fallbackKey);
+        };
         label.textContent = data.label;
         img.style.opacity = '1';
       }, 150);
