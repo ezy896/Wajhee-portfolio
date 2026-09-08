@@ -265,7 +265,7 @@
     background: linear-gradient(135deg, rgba(0, 242, 254, 0.6), rgba(79, 172, 254, 0.2), rgba(255,255,255,0.05));
     box-shadow: 0 0 30px -5px rgba(0, 242, 254, 0.3), inset 0 0 15px rgba(0, 242, 254, 0.2);
     transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring);
-    cursor: pointer;
+    cursor: default;
   }
   .avatar-frame:hover {
     transform: scale(1.04);
@@ -304,35 +304,6 @@
   }
   .avatar-frame:hover .avatar-img {
     transform: scale(1.06);
-  }
-
-  /* Avatar upload hover overlay */
-  .avatar-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(7, 8, 11, 0.75);
-    backdrop-filter: blur(4px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    border-radius: 50%;
-    color: var(--accent);
-    font-size: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    text-align: center;
-    padding: 6px;
-  }
-  .avatar-frame:hover .avatar-overlay {
-    opacity: 1;
-  }
-  .avatar-overlay svg {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 3px;
-    stroke: var(--accent);
   }
 
   /* Precision HUD crosshair markers */
@@ -1076,9 +1047,101 @@
     opacity: 1;
   }
 
-  /* Hidden file input for browser photo uploads */
-  #photoUploadInput {
-    display: none;
+  /* Greeting Screen / Welcome Overlay */
+  body.greeting-active {
+    overflow: hidden;
+  }
+
+  .greeting-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 35%, rgba(14, 16, 21, 0.94) 0%, rgba(7, 8, 11, 0.98) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+  }
+
+  .greeting-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .greeting-card {
+    background: var(--surface);
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    border-radius: var(--radius-lg);
+    padding: 44px 38px;
+    max-width: 490px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7), 0 0 50px -10px rgba(0, 242, 254, 0.2);
+    transform: translateY(0) scale(1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .greeting-screen.hide .greeting-card {
+    transform: translateY(-20px) scale(0.96);
+  }
+
+  .greeting-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .greeting-badge {
+    margin-bottom: 22px;
+  }
+
+  .greeting-title {
+    font-size: clamp(26px, 5vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+
+  .greeting-desc {
+    color: var(--text-muted);
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+
+  .greeting-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .greeting-btn {
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 242, 254, 0.3);
+    cursor: pointer;
+  }
+
+  .greeting-subnote {
+    display: block;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
   }
 
   @media (max-width: 768px) {
@@ -1098,6 +1161,27 @@
 </style>
 </head>
 <body>
+
+<!-- Greeting Screen Overlay -->
+<div id="greetingScreen" class="greeting-screen" role="dialog" aria-modal="true" aria-labelledby="greetingTitle">
+  <div class="greeting-card">
+    <div class="status-pill greeting-badge">
+      <span class="blip"></span>
+      <span>Welcome</span>
+    </div>
+    <h1 id="greetingTitle" class="greeting-title">Welcome to My Portfolio</h1>
+    <p class="greeting-desc">
+      Thank you for visiting! Explore my latest work, technical projects, and background in software and artificial intelligence.
+    </p>
+    <div class="greeting-actions">
+      <button type="button" class="btn primary greeting-btn" id="enterSiteBtn" autofocus>
+        <span>Enter Portfolio</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+    <span class="greeting-subnote">Click to explore the site</span>
+  </div>
+</div>
 
 <!-- Interactive Motion Canvas -->
 <canvas id="motion-canvas"></canvas>
@@ -1133,9 +1217,6 @@
   </nav>
 </div>
 
-<!-- Hidden Photo Upload Input -->
-<input type="file" id="photoUploadInput" accept="image/*" aria-label="Upload profile picture">
-
 <main class="wrap" id="top">
 
   <!-- HERO SECTION -->
@@ -1148,17 +1229,10 @@
       <div class="crosshair ch-bl">+</div>
       <div class="crosshair ch-br">+</div>
       
-      <div class="avatar-frame" id="avatarButton" title="Click to change photo">
+      <div class="avatar-frame">
         <div class="avatar-orbit"></div>
         <div class="avatar-img-wrap">
           <img src="avatar.png" id="profileImage" alt="SM Wajhee Babar" class="avatar-img" onerror="imgFallback(this, 'avatar')">
-          <div class="avatar-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-              <circle cx="12" cy="13" r="4"></circle>
-            </svg>
-            <span>EDIT PHOTO</span>
-          </div>
         </div>
       </div>
     </div>
@@ -1706,37 +1780,37 @@
   }
   requestAnimationFrame(updateTimecode);
 
-  // Profile Picture Upload Handler & LocalStorage Persistence
-  var avatarButton = document.getElementById('avatarButton');
-  var photoInput = document.getElementById('photoUploadInput');
-  var profileImage = document.getElementById('profileImage');
+  // Greeting Screen Interaction (No timer, user-friendly entry)
+  var greetingScreen = document.getElementById('greetingScreen');
+  var enterSiteBtn = document.getElementById('enterSiteBtn');
 
-  var savedAvatar = localStorage.getItem('custom_wajhee_avatar');
-  if (savedAvatar && savedAvatar.startsWith('data:image')) {
-    profileImage.src = savedAvatar;
-  }
+  if (greetingScreen && enterSiteBtn) {
+    document.body.classList.add('greeting-active');
 
-  if (avatarButton && photoInput) {
-    avatarButton.addEventListener('click', function() {
-      photoInput.click();
-    });
+    function enterPortfolio() {
+      greetingScreen.classList.add('hide');
+      document.body.classList.remove('greeting-active');
+      setTimeout(function() {
+        greetingScreen.style.display = 'none';
+      }, 500);
+    }
 
-    photoInput.addEventListener('change', function(e) {
-      var file = e.target.files[0];
-      if (file) {
-        var reader = new FileReader();
-        reader.onload = function(evt) {
-          profileImage.src = evt.target.result;
-          try {
-            localStorage.setItem('custom_wajhee_avatar', evt.target.result);
-          } catch(err) {
-            console.warn('LocalStorage limit reached', err);
-          }
-          showToast('Profile picture updated!');
-        };
-        reader.readAsDataURL(file);
+    enterSiteBtn.addEventListener('click', enterPortfolio);
+
+    // Keyboard accessibility (Enter or Space to enter)
+    window.addEventListener('keydown', function(e) {
+      if (!greetingScreen.classList.contains('hide')) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          enterPortfolio();
+        }
       }
     });
+
+    // Focus enter button
+    setTimeout(function() {
+      enterSiteBtn.focus();
+    }, 100);
   }
 
   // Multi-Project Screenshot Showcase Data with Fallback Keys
