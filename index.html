@@ -24,11 +24,11 @@
     --border: rgba(255, 255, 255, 0.08);
     --border-subtle: rgba(255, 255, 255, 0.04);
     --border-glow: rgba(0, 242, 254, 0.25);
-    
+
     --text: #F4F6FB;
     --text-muted: #949AA8;
     --text-dim: #5C6272;
-    
+
     --accent: #00F2FE;
     --accent-blue: #4FACFE;
     --accent-mint: #38EF7D;
@@ -36,18 +36,18 @@
     --accent-red-glow: rgba(255, 59, 48, 0.2);
     --accent-glow: rgba(0, 242, 254, 0.16);
     --accent-gradient: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
-    
+
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 20px;
     --radius-pill: 9999px;
-    
+
     --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
+
   html {
     scroll-behavior: smooth;
     background: var(--bg);
@@ -92,7 +92,7 @@
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    background-image: 
+    background-image:
       linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
     background-size: 48px 48px;
@@ -271,7 +271,7 @@
     transform: scale(1.04);
     box-shadow: 0 0 40px -2px rgba(0, 242, 254, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.3);
   }
-  
+
   /* Rotating dashed kinetic ring around avatar */
   .avatar-orbit {
     position: absolute;
@@ -1209,7 +1209,7 @@
     <a href="#contact" class="nav-link" data-target="contact">
       <span class="nav-indicator-dot"></span>Contact
     </a>
-    
+
     <div class="hud-badge mono">
       <span class="rec-dot"></span>
       <span id="timecode">00:00:00:00</span>
@@ -1221,14 +1221,14 @@
 
   <!-- HERO SECTION -->
   <section class="hero" style="border-top:none;">
-    
+
     <!-- Kinetic Profile Picture Module -->
     <div class="avatar-module fade-in-up" style="animation-delay: 0.05s;">
       <div class="crosshair ch-tl">+</div>
       <div class="crosshair ch-tr">+</div>
       <div class="crosshair ch-bl">+</div>
       <div class="crosshair ch-br">+</div>
-      
+
       <div class="avatar-frame">
         <div class="avatar-orbit"></div>
         <div class="avatar-img-wrap">
@@ -1276,7 +1276,7 @@
     <div class="section-label">01 // Capabilities</div>
     <h2 class="section-title">Technical Expertise</h2>
     <p class="section-sub">Core toolsets, AI technologies, and programming frameworks.</p>
-    
+
     <div class="skills-grid">
       <div class="skill-pill"><span class="dot"></span> Python</div>
       <div class="skill-pill"><span class="dot"></span> Multi-Agent Orchestration</div>
@@ -1300,7 +1300,7 @@
     <div class="section-label">02 // Experience</div>
     <h2 class="section-title">Work Experience</h2>
     <p class="section-sub">Where I've applied machine learning and software engineering.</p>
-    
+
     <div class="exp-card">
       <div class="exp-header">
         <div>
@@ -1327,7 +1327,7 @@
     <div class="section-label">03 // Featured Work</div>
     <h2 class="section-title">Projects &amp; Systems</h2>
     <p class="section-sub">Selected engineering builds, multi-agent pipelines, and intelligent software architectures.</p>
-    
+
     <div class="projects">
 
       <!-- PROJECT 1: AI EMERGENCY CHATBOT (FEATURED MULTI-AGENT ARCHITECTURE) -->
@@ -1339,7 +1339,7 @@
           </div>
           <div class="proj-arrow">↗</div>
         </div>
-        
+
         <div class="proj-desc">
           An autonomous multi-agent emergency triage and guidance system. When a critical crisis or hazard (e.g. floods, building fires) is detected by the LLM-powered crisis detector with high confidence (97%+), the system triggers an instant <strong>Emergency Bypass</strong> routing directly to Escalation and Logging agents. For standard assistance, a central Supervisor coordinates a 7-agent pipeline (Intake, Triage, Guidance, Escalation, Resources, Logging, and Response Delivery) exposed via FastAPI and rendered through an interactive React dashboard.
         </div>
@@ -1384,7 +1384,7 @@
 
             <!-- LANE LABELS -->
             <text x="16" y="20" class="dg-lane-label">// 1. REQUEST INTAKE &amp; CRISIS DETECTION</text>
-            
+
             <!-- INTAKE ROW -->
             <rect x="14" y="30" width="100" height="42" class="dg-node-box"/>
             <text x="64" y="47" text-anchor="middle" class="dg-label">User Prompt</text>
@@ -1423,7 +1423,7 @@
 
             <!-- BRANCH B: NORMAL SUPERVISOR MULTI-AGENT PATH -->
             <text x="16" y="112" class="dg-lane-label">// 2. SUPERVISOR &amp; SPECIALIZED MULTI-AGENTS</text>
-            
+
             <path d="M377 74 V120" class="dg-arrow" marker-end="url(#arr-cyan-em)"/>
             <path d="M377 74 V120" class="dg-flow"/>
             <text x="382" y="98" font-size="8" class="mono" fill="#00F2FE">NO RED FLAGS</text>
@@ -1495,7 +1495,7 @@
           </div>
           <div class="proj-arrow">↗</div>
         </div>
-        
+
         <div class="proj-desc">
           An intelligent document companion and Retrieval-Augmented Generation (RAG) assistant designed to ingest custom document knowledge bases, execute top-k semantic vector similarity search using ChromaDB and Sentence Transformers, and synthesize natural, context-grounded responses via Groq LLMs. Features voice response synthesis (TTS "Read responses aloud"), dynamic chat sessions, interactive prompt suggestions, and high-speed retrieval.
         </div>
@@ -1537,7 +1537,7 @@
 
             <!-- Lane 1: Ingestion -->
             <text x="16" y="22" class="dg-lane-label">// INGESTION PIPELINE</text>
-            
+
             <rect x="14" y="32" width="105" height="48" class="dg-node-box"/>
             <text x="66" y="52" text-anchor="middle" class="dg-label">Documents</text>
             <text x="66" y="66" text-anchor="middle" class="dg-sublabel">PDF / Text files</text>
@@ -1565,7 +1565,7 @@
 
             <!-- Lane 2: Query / Generation -->
             <text x="16" y="118" class="dg-lane-label">// REAL-TIME QUERY &amp; KORG INFERENCE</text>
-            
+
             <rect x="14" y="128" width="105" height="48" class="dg-node-box"/>
             <text x="66" y="148" text-anchor="middle" class="dg-label">User Query</text>
             <text x="66" y="162" text-anchor="middle" class="dg-sublabel">Korg UI / Voice</text>
@@ -1583,7 +1583,7 @@
             <rect x="528" y="128" width="135" height="48" class="dg-node-box dg-accent"/>
             <text x="595" y="148" text-anchor="middle" class="dg-label" fill="#00F2FE">Groq / Korg LLM</text>
             <text x="595" y="162" text-anchor="middle" class="dg-sublabel">Contextual Output</text>
-            
+
             <!-- Link from DB to Similarity -->
             <path d="M595 80 V128" class="dg-arrow" stroke-dasharray="3 3" marker-end="url(#arr-cyan)"/>
           </svg>
@@ -1655,6 +1655,113 @@
         </div>
       </div>
 
+      <!-- PROJECT 4: WEATHER DETECTOR -->
+      <div class="proj-card featured-card">
+        <div class="proj-top">
+          <div class="proj-title">
+            <span>Weather Detector (VibeCast) — Real-Time Climate Intelligence System</span>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </div>
+        <div class="proj-desc">
+          A real-time meteorological sensing and climate intelligence application (VibeCast) featuring Kai, an interactive weather companion. Ingests atmospheric telemetry across regional cities to compute daily weather vibe checks, classify conditions (&ldquo;Golden &amp; Pleasant&rdquo;), generate contextual lifestyle metrics (Chai Index, Fit Guide, Outdoor Vibe ratings), and deliver multi-day predictive forecast trajectories and rain volumes.
+        </div>
+
+        <!-- Live Screenshot Showcase / Tabbed Gallery -->
+        <div class="screenshot-showcase">
+          <div class="showcase-header">
+            <div class="showcase-tabs">
+              <button class="showcase-tab active" onclick="switchShowcase('weather', 'home', this)">01 // VibeCast UI</button>
+              <button class="showcase-tab" onclick="switchShowcase('weather', 'cities', this)">02 // City Selector</button>
+              <button class="showcase-tab" onclick="switchShowcase('weather', 'report', this)">03 // Climate Intel</button>
+              <button class="showcase-tab" onclick="switchShowcase('weather', 'forecast', this)">04 // Forecast Trajectory</button>
+            </div>
+            <div class="showcase-badge">
+              <span class="rec-dot" style="width:5px; height:5px; background: #FF8A00;"></span>
+              <span>VIBECAST · CLIMATE INTELLIGENCE</span>
+            </div>
+          </div>
+          <div class="showcase-viewport" onclick="openLightboxFrom('showcaseImage-weather')">
+            <img id="showcaseImage-weather" src="assets/weather-detector/weather-vibecast-home.png" alt="Weather Detector Interface" class="showcase-img">
+          </div>
+          <div class="showcase-caption">
+            <span id="showcaseLabel-weather">VibeCast AI Hero — Interactive City Search &amp; Daily Weather Vibe Checks</span>
+            <span style="color:var(--accent); font-size:11px;">🔍 Click to expand</span>
+          </div>
+        </div>
+
+        <!-- Animated Workflow Diagram -->
+        <div class="proj-diagram">
+          <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-cyan-wd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#00F2FE"/>
+              </marker>
+              <marker id="arr-gray-wd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="rgba(255,255,255,0.2)"/>
+              </marker>
+              <marker id="arr-amber-wd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#F59E0B"/>
+              </marker>
+            </defs>
+
+            <!-- Lane 1: Telemetry Pipeline -->
+            <text x="16" y="22" class="dg-lane-label">// REAL-TIME METEOROLOGICAL TELEMETRY &amp; DETECTION PIPELINE</text>
+
+            <rect x="14" y="32" width="112" height="48" class="dg-node-box"/>
+            <text x="70" y="52" text-anchor="middle" class="dg-label">Weather Stream</text>
+            <text x="70" y="66" text-anchor="middle" class="dg-sublabel">API &amp; Live Sensors</text>
+
+            <path d="M126 56 H168" class="dg-arrow" marker-end="url(#arr-gray-wd)"/>
+            <path d="M126 56 H168" class="dg-flow"/>
+
+            <rect x="168" y="32" width="124" height="48" class="dg-node-box"/>
+            <text x="230" y="52" text-anchor="middle" class="dg-label">Data Normalizer</text>
+            <text x="230" y="66" text-anchor="middle" class="dg-sublabel">Quality &amp; Indexing</text>
+
+            <path d="M292 56 H334" class="dg-arrow" marker-end="url(#arr-cyan-wd)"/>
+            <path d="M292 56 H334" class="dg-flow"/>
+
+            <!-- Detection Engine -->
+            <rect x="334" y="28" width="148" height="56" class="dg-node-box dg-accent"/>
+            <text x="408" y="51" text-anchor="middle" class="dg-label" fill="#00F2FE">Weather Detector</text>
+            <text x="408" y="66" text-anchor="middle" class="dg-sublabel">Condition &amp; Anomaly ML</text>
+
+            <!-- Branch A: Severe Alerts -->
+            <path d="M482 46 H526" class="dg-arrow" marker-end="url(#arr-amber-wd)"/>
+            <rect x="526" y="28" width="140" height="40" class="dg-node-box"/>
+            <text x="596" y="44" text-anchor="middle" class="dg-label" fill="#F59E0B">Severe Alerts</text>
+            <text x="596" y="57" text-anchor="middle" class="dg-sublabel">Storm / Rain / Heat Alert</text>
+
+            <!-- Branch B: Forecast & Analytics -->
+            <path d="M482 68 H526" class="dg-arrow" marker-end="url(#arr-cyan-wd)"/>
+            <path d="M482 68 H526" class="dg-flow"/>
+            <rect x="526" y="74" width="140" height="42" class="dg-node-box dg-accent"/>
+            <text x="596" y="91" text-anchor="middle" class="dg-label" fill="#00F2FE">Forecast &amp; UI</text>
+            <text x="596" y="104" text-anchor="middle" class="dg-sublabel">Dynamic Radar &amp; Trends</text>
+
+            <!-- Continuous Telemetry Parameters Row -->
+            <text x="16" y="112" class="dg-lane-label">// ATMOSPHERIC PARAMETERS MONITORED</text>
+            <rect x="14" y="122" width="468" height="28" class="dg-node-box"/>
+            <text x="248" y="140" text-anchor="middle" class="mono" font-size="9" fill="#94A3B8">
+              Telemetry: Temp · Barometric Pressure · Relative Humidity · Wind Vector · UV Index
+            </text>
+            <path d="M482 136 H596 V116" class="dg-arrow" marker-end="url(#arr-cyan-wd)"/>
+          </svg>
+        </div>
+
+        <div class="proj-tags">
+          <span>Python</span>
+          <span>FastAPI</span>
+          <span>OpenWeather API</span>
+          <span>VibeCast System</span>
+          <span>Atmospheric Modeling</span>
+          <span>Anomaly Detection</span>
+          <span>Predictive Weather Analysis</span>
+          <span>Data Visualization</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1696,7 +1803,7 @@
     <div class="contact-box">
       <h2>Let's build something together</h2>
       <p>Currently open to AI, Machine Learning, and Software Engineering internships and collaborative projects.</p>
-      
+
       <div class="contact-row">
         <a href="mailto:wajheebabar4@gmail.com" class="btn primary">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -1858,6 +1965,24 @@
         fallbackKey: 'korg_logo',
         label: 'Korg Brand & Intelligent Document Companion Banner'
       }
+    },
+    weather: {
+      home: {
+        src: 'assets/weather-detector/weather-vibecast-home.png',
+        label: 'VibeCast AI Hero — Interactive City Search & Kai Weather Companion'
+      },
+      cities: {
+        src: 'assets/weather-detector/weather-cities-select.png',
+        label: '1-Tap City Selection Grid & Regional Atmospheric Telemetry'
+      },
+      report: {
+        src: 'assets/weather-detector/weather-report-card.png',
+        label: 'Live Climate Intelligence Card: Conditions, Chai Index & Fit Guide'
+      },
+      forecast: {
+        src: 'assets/weather-detector/weather-forecast-trajectory.png',
+        label: 'Multi-Day Forecast Trajectory & Atmospheric Volume Analytics'
+      }
     }
   };
 
@@ -1966,7 +2091,7 @@
       var y = e.clientY - rect.top;
       card.style.setProperty('--mx', x + 'px');
       card.style.setProperty('--my', y + 'px');
-      
+
       var centerX = rect.width / 2;
       var centerY = rect.height / 2;
       var rotateX = ((y - centerY) / centerY) * -3;
